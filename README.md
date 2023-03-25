@@ -49,7 +49,7 @@ from address_ping_system import aps
 
 my_aps_client = aps("MyNarunoPass")
 
-result = my_aps_client.ping("client_address", "server_address")
+result = my_aps_client.ping("server_address")
 
 print(result)
 
@@ -58,7 +58,7 @@ my_aps_client.close()
 
 also you can use in command line:
 ```console	
-aps --password MyNarunoPass ping "client_address" "server_address"
+aps --password MyNarunoPass ping "server_address"
 ```
 
 
