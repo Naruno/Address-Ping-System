@@ -6,6 +6,7 @@ import pickle
 import contextlib
 
 class aps:
+    command_line = False
     def __init__(self, password, timeout=180, cache_time=120, trusted_users=[], port=8000):
         self.trusted_users = trusted_users
         self.integration = Integration("APS", password=password, port=port)
@@ -47,6 +48,8 @@ class aps:
                         if time.time() - each["transaction_time"] < self.timeout:
                             self.last_ping_time = time.time()
                             self.save_cache()
+                            if aps.command_line:
+                                self.close()
                             return True
             time.sleep(5)
 
@@ -68,4 +71,5 @@ class aps:
         self.integration.close()
 
 def main():
+    aps.command_line = True
     fire.Fire(aps)
