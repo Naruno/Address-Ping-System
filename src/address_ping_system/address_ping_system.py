@@ -44,9 +44,10 @@ class aps:
             if data != []:
                 for each in data:
                     if each["fromUser"] == user:
-                        self.last_ping_time = time.time()
-                        self.save_cache()
-                        return True
+                        if time.time() - each["transaction_time"] < self.timeout:
+                            self.last_ping_time = time.time()
+                            self.save_cache()
+                            return True
             time.sleep(5)
 
 
