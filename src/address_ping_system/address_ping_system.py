@@ -34,6 +34,8 @@ class aps:
     
     def ping(self, user):
         if time.time() - self.last_ping_time < self.cache_time:
+            if aps.command_line:
+                self.close()            
             return True
 
         self.integration.send("message", "hi", user)
