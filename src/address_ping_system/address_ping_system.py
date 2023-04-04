@@ -17,8 +17,8 @@ class aps:
     def __init__(self, password, timeout=180, cache_time=120, trusted_users=[], port=8000):
         self.trusted_users = trusted_users
         self.integration = Integration("APS", password=password, port=port)
-        self.timeout = timeout
-        self.cache_time = cache_time
+        self.timeout = timeout + self.integration.wait_amount
+        self.cache_time = cache_time + self.integration.wait_amount
         self.last_ping_time = 0
 
         self.load_cache()
