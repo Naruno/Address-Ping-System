@@ -16,7 +16,9 @@ import contextlib
 class aps:
     command_line = False
 
-    def __init__(self, password, timeout=180, cache_time=120, trusted_users=[], port=8000):
+    def __init__(
+        self, password, timeout=180, cache_time=120, trusted_users=[], port=8000
+    ):
         self.trusted_users = trusted_users
         self.integration = Integration("APS", password=password, port=port)
         self.timeout = timeout
@@ -34,7 +36,6 @@ class aps:
             self.last_ping_time = pickle.load(f)
 
     def save_cache(self):
-
         self.last_ping_time_save()
 
     def load_cache(self):
@@ -73,8 +74,7 @@ class aps:
             if data != []:
                 for each in data:
                     if each["fromUser"] in self.trusted_users:
-                        self.integration.send(
-                            "reply", "hello", each["fromUser"])
+                        self.integration.send("reply", "hello", each["fromUser"])
             time.sleep(5)
 
     def close(self):
