@@ -12,8 +12,10 @@ import fire
 import pickle
 import contextlib
 
+
 class aps:
     command_line = False
+
     def __init__(self, password, timeout=180, cache_time=120, trusted_users=[], port=8000):
         self.trusted_users = trusted_users
         self.integration = Integration("APS", password=password, port=port)
@@ -26,6 +28,7 @@ class aps:
     def last_ping_time_save(self):
         with open("last_ping_time.txt", "wb") as f:
             pickle.dump(self.last_ping_time, f)
+
     def last_ping_time_load(self):
         with open("last_ping_time.txt", "rb") as f:
             self.last_ping_time = pickle.load(f)
@@ -36,13 +39,12 @@ class aps:
 
     def load_cache(self):
         with contextlib.suppress(Exception):
-            self.last_ping_time_load()    
+            self.last_ping_time_load()
 
-    
     def ping(self, user):
         if time.time() - self.last_ping_time < self.cache_time:
             if aps.command_line:
-                self.close()            
+                self.close()
             return True
 
         self.integration.send("message", "hi", user)
@@ -62,8 +64,6 @@ class aps:
                             return True
             time.sleep(5)
 
-
-    
     def add_user(self, user):
         self.trusted_users.append(user)
 
@@ -73,11 +73,13 @@ class aps:
             if data != []:
                 for each in data:
                     if each["fromUser"] in self.trusted_users:
-                        self.integration.send("reply", "hello", each["fromUser"])
+                        self.integration.send(
+                            "reply", "hello", each["fromUser"])
             time.sleep(5)
 
     def close(self):
         self.integration.close()
+
 
 def main():
     aps.command_line = True
