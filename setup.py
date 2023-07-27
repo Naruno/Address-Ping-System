@@ -2,7 +2,7 @@ from setuptools import setup
 
 
 setup(name='address_ping_system',
-version='0.3.2',
+version='0.4.0',
 description="""Mapping Addresses to Dynamic IPs, Simplified""",
 long_description_content_type="text/markdown",
 include_package_data=True,
