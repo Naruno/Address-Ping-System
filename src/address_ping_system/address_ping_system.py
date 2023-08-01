@@ -80,7 +80,7 @@ class aps:
             if data != []:
                 for each in data:
                     self.integration.send("reply", "hello", each["fromUser"])
-                    ping_db.set(str(time.time()+str(random.randint(0, 100000))), each["fromUser"])
+                    ping_db.set(str(time.time())+str(random.randint(0, 100000)), each["fromUser"])
             time.sleep(5)
 
     def close(self):
