@@ -18,6 +18,15 @@ import random
 
 
 ping_db = KOT("ping_db")
+settings_db = KOT("settings_db")
+
+
+def max_user():
+    record = settings_db.get("max_user")
+    if record is None:
+        return 1000
+    return record
+        
 
 class aps:
     command_line = False
@@ -79,7 +88,7 @@ class aps:
             data = self.integration.get()
             if data != []:
                 for each in data:
-                    if ping_db.get(each["fromUser"]) != True and ping_db.get_count() < 1:
+                    if ping_db.get(each["fromUser"]) != True and ping_db.get_count() < max_user():
                         self.integration.send("reply", "hello", each["fromUser"])
                         ping_db.set(each["fromUser"], True)
             time.sleep(5)
