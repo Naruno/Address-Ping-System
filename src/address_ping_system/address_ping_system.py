@@ -5,12 +5,19 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+from kot import KOT
+
 from naruno.apps.remote_app import Integration
 
 import time
 import fire
 import pickle
 import contextlib
+
+import random
+
+
+ping_db = KOT("ping_db")
 
 class aps:
     command_line = False
@@ -72,8 +79,8 @@ class aps:
             data = self.integration.get()
             if data != []:
                 for each in data:
-                    if each["fromUser"] in self.trusted_users:
-                        self.integration.send("reply", "hello", each["fromUser"])
+                    self.integration.send("reply", "hello", each["fromUser"])
+                    ping_db.set(str(time.time()+str(random.randint(0, 100000))), each["fromUser"])
             time.sleep(5)
 
     def close(self):
