@@ -15,7 +15,8 @@ setup(
     package_dir={"": "src"},
     install_requires=["fire==0.5.0", "naruno_remote_app", "naruno"],
     entry_points={
-        "console_scripts": ["aps=address_ping_system.address_ping_system:main"],
+        "console_scripts":
+        ["aps=address_ping_system.address_ping_system:main"],
     },
     python_requires=">= 3",
     zip_safe=False,
