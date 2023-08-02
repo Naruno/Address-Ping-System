@@ -15,7 +15,8 @@ packages=["address_ping_system"],
 package_dir={'':'src'},
 install_requires=[
     "fire==0.5.0",
-    "naruno_remote_app==0.59.0"
+    "naruno_remote_app",
+    "naruno"
 ],
 entry_points = {
     'console_scripts': ['aps=address_ping_system.address_ping_system:main'],
