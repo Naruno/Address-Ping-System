@@ -1,6 +1,5 @@
 from setuptools import setup
 
-
 setup(
     name="address_ping_system",
     version="0.4.0",
