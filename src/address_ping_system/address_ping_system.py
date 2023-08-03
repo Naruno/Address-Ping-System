@@ -88,7 +88,7 @@ class aps:
             data = self.integration.get()
             if data != []:
                 for each in data:
-                    if ping_db.get(each["fromUser"]) != True and ping_db.get_count() < max_user():
+                    if ping_db.get_count() < max_user():
                         ping_db.set(each["fromUser"], True)
                         self.integration.send("reply", "hello", each["fromUser"])
             time.sleep(5)
